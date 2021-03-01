@@ -1,0 +1,32 @@
+{
+  "tags": {
+    "allowUnknownTags": false
+  },
+  "source": {
+    "include": [
+      "./lib/"
+    ]
+  },
+  "plugins": [
+    "./node_modules/jsdoc/plugins/markdown",
+    "./scripts/jsdoc-fix"
+  ],
+  "templates": {
+    "default": {
+      "outputSourceFiles": false
+    },
+    "applicationName": "",
+    "footer": "Maintained by the xx Team",
+    "copyright": "xx Team",
+    "linenums": true
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": true
+  },
+  "opts": {
+    "template": "./node_modules/jaguarjs-jsdoc",
+    "destination": "./docs/",
+    "recurse": true
+  }
+}
