@@ -1,8 +1,8 @@
-import alias from '@rollup/plugin-alias';
+import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import babel from '@rollup/plugin-babel';
 import { uglify } from 'rollup-plugin-uglify';
+import serve from 'rollup-plugin-serve';
 
 const pkg = require('./package.json');
 const production = process.env.BUILD === 'production';
@@ -26,26 +26,12 @@ const config = {
     banner,
   },
   plugins: [
-    alias({
-      tslib: require.resolve('tslib/tslib.es6.js'),
-    }),
+    typescript(),
     resolve({
       mainFields: ['jsnext:main'],
     }),
     commonjs({
       ignoreGlobal: true,
-      sourceMap: false,
-    }),
-    babel({
-      babelrc: false,
-      include: ['./lib/**/*.js'],
-      presets: [
-        '@babel/preset-env',
-      ],
-      plugins: [
-        ['@babel/plugin-transform-runtime'],
-      ],
-      babelHelpers: 'runtime',
     }),
     (production && uglify({
       output: {
@@ -54,5 +40,13 @@ const config = {
     })),
   ],
 };
+
+if (process.argv.includes('--watch')) {
+  config.plugins.push(serve({
+    contentBase: '',
+    host: 'localhost',
+    port: 8080,
+  }));
+}
 
 export default config;

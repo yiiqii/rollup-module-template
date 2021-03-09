@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "alwaysStrict": true,
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "lib": ["es5", "es6", "dom"],
-    "module": "es6",
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
     "outDir": "./lib",
     "sourceMap": false,
     "strictNullChecks": true,
@@ -24,8 +22,9 @@
   },
   "include": [
     "src",
+    "types"
   ],
   "exclude": [
-    "node_modules",
+    "node_modules"
   ]
 }
