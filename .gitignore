@@ -7,6 +7,6 @@ coverage
 dist
 docs
 lib
+index.debug.js
 /main.js
 /index.js
-/index.debug.js

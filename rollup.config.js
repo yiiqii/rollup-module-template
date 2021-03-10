@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { uglify } from 'rollup-plugin-uglify';
 import serve from 'rollup-plugin-serve';
+import livereload from 'rollup-plugin-livereload';
 
 const pkg = require('./package.json');
 const production = process.env.BUILD === 'production';
@@ -18,7 +19,7 @@ const banner = `/*!
 `;
 
 const config = {
-  input: 'lib/index.js',
+  input: 'src/index.ts',
   output: {
     file,
     format,
@@ -42,11 +43,17 @@ const config = {
 };
 
 if (process.argv.includes('--watch')) {
-  config.plugins.push(serve({
-    contentBase: '',
-    host: 'localhost',
-    port: 8080,
-  }));
+  const contentBase = 'demo';
+
+  config.output.file = `${contentBase}/${file}`;
+  config.plugins.push(
+    serve({
+      contentBase,
+      host: 'localhost',
+      port: 8080,
+    }),
+    livereload(contentBase),
+  );
 }
 
 export default config;
